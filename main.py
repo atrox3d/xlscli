@@ -1,34 +1,32 @@
 import logging
-from pathlib import Path
 import pandas
 import numpy
 import typer
 
+import files
+import logconfig
+
+logger = logging.getLogger(__name__)
 
 app = typer.Typer(add_completion=False)
+app.add_typer(files.app, name='files')
 
 
 @app.callback(invoke_without_command=True)
-def default(ctx:typer.Context, path:str='data', match:str='', case:bool=False, sort:bool=True):
+def default(
+    ctx:typer.Context, 
+    path:str='data', match:str='', case:bool=False, sort:bool=True,
+    log_level:logconfig.LogLevels = 'INFO'
+):
+    logging.basicConfig(
+        level=log_level.value
+    )
+    
     ctx.ensure_object(dict)
     
-    print('STARTED')
-    # print(ctx.invoked_subcommand)
+    logger.debug(f'main callback STARTED {ctx.invoked_subcommand = }')
     if ctx.invoked_subcommand is None:
-        list_files(path, match, case, sort)
-
-
-@app.command('list')
-def list_files(path:str='data', match:str='', case:bool=False, sort:bool=True):
-    # print(locals())
-    # exit()
-    files_paths = list(Path(path).glob('*.xls*'))
-    [
-        print(file.name) 
-        for file in (files_paths if not sort else sorted(files_paths)) 
-        if (match if case else match.lower()) in (file.name if case else file.name.lower())
-    ]
-
+        files.list_files(path, match, case, sort)
 
 
 if __name__ == "__main__":
