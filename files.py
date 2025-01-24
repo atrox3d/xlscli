@@ -31,10 +31,20 @@ def list_files(path:str='data', match:str='', case:bool=False, sort:bool=True):
         print(f'({n:2}) - {file!r}')
 
 
-@app.command('choose')
-def choose_file(path:str='data', match:str='', case:bool=False, sort:bool=True):
+@app.command('open')
+def open_file(filename:str = typer.Argument(default=None), path:str='data', match:str='', case:bool=False, sort:bool=True):
     # print(locals())
     # exit()
+    if filename is None:
+        filename = choose_file(path, match, case, sort)
+    else:
+        filepath = Path(path, filename)
+        if not filepath.exists():
+            logger.fatal(f'{filepath} does not exist')
+            raise typer.Abort()
+
+
+def choose_file(path:str='data', match:str='', case:bool=False, sort:bool=True) -> str:
     files_paths = list(Path(path).glob('*.xls*'))
     file_list = [
         file.name
@@ -47,6 +57,7 @@ def choose_file(path:str='data', match:str='', case:bool=False, sort:bool=True):
     try:
         fileno = int(input('choose file number: '))
         print(f'you have chosen {fileno}: {file_list[fileno-1]}')
+        return file_list[fileno-1]
     except IndexError:
         print(f'wrong number {fileno}')
         raise typer.Abort()
