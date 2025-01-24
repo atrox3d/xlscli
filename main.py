@@ -7,8 +7,9 @@ import typer
 
 app = typer.Typer()
 
+
 @app.callback(invoke_without_command=True)
-def callback(ctx:typer.Context):
+def default(ctx:typer.Context):
     ctx.ensure_object(dict)
     print('STARTED')
 
