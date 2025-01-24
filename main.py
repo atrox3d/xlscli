@@ -5,7 +5,7 @@ import numpy
 import typer
 
 
-app = typer.Typer()
+app = typer.Typer(add_completion=False)
 
 
 @app.callback(invoke_without_command=True)
