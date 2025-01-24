@@ -20,7 +20,7 @@ def default(ctx:typer.Context, path:str='data', match:str='', case:bool=False):
 @app.command('list')
 def list_files(path:str='data', match:str='', case:bool=False):
     files_paths = list(Path(path).glob('*.xls*'))
-    print([file.name for file in files_paths if (match if case else match.lower()) in (file.name if case else file.name.lower())])
+    [print(file.name) for file in files_paths if (match if case else match.lower()) in (file.name if case else file.name.lower())]
 
 
 
