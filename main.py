@@ -13,12 +13,15 @@ def default(ctx:typer.Context, path:str='data', match:str='', case:bool=False, s
     ctx.ensure_object(dict)
     
     print('STARTED')
-    
-    list_files(path, match, case, sort)
+    # print(ctx.invoked_subcommand)
+    if ctx.invoked_subcommand is None:
+        list_files(path, match, case, sort)
 
 
 @app.command('list')
 def list_files(path:str='data', match:str='', case:bool=False, sort:bool=True):
+    # print(locals())
+    # exit()
     files_paths = list(Path(path).glob('*.xls*'))
     [
         print(file.name) 
