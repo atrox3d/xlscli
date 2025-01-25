@@ -10,6 +10,30 @@ logger = logging.getLogger(__name__)
 app = typer.Typer(add_completion=False)
 app.add_typer(files.app, name='files')
 
+# main (list)
+# main files list
+# main files open [filepath or chooser]
+
+# main                          -> help
+# main files list               -> list
+# main files open <filepath>    -> open
+# main files open               -> choose -> open
+
+
+# main                          -> help
+# main list                     -> list
+# main open <filepath>          -> open
+# main open                     -> choose -> open
+
+
+# main                          -> help
+# main list --path <path or .>  -> list
+# main open <filepath>          -> open
+# main open --path <path>       -> choose -> open
+# main browse <path>            -> choose -> open
+
+
+
 
 @app.callback(invoke_without_command=True)
 def default(
