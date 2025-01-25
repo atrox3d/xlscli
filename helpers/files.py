@@ -1,10 +1,9 @@
 import typer
-
-
 from pathlib import Path
 
+from helpers import config
 
-def choose_file(path:str='data', match:str='', case:bool=False, sort:bool=True) -> str:
+def choose_file(path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True) -> str:
     files_paths = list(Path(path).glob('*.xls*'))
     file_list = [
         file.name

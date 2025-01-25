@@ -5,6 +5,7 @@ import typer
 
 import commands.files as files
 import helpers.logconfig as logconfig
+from helpers import config
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +16,7 @@ app.add_typer(files.app, name='files')
 @app.callback(invoke_without_command=True)
 def default(
     ctx:typer.Context, 
-    path:str='data', match:str='', case:bool=False, sort:bool=True,
+    path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True,
     log_level:logconfig.LogLevels = 'INFO'
 ):
     logging.basicConfig(

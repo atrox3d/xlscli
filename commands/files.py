@@ -3,7 +3,9 @@ import typer
 from pathlib import Path
 
 from helpers.files import choose_file
-import helpers.xls as xls
+from helpers import xls
+from helpers import config
+
 
 logger = logging.getLogger(__name__)
 
@@ -11,7 +13,7 @@ app = typer.Typer()
 
 
 @app.callback(invoke_without_command=True)
-def default(ctx:typer.Context, path:str='data', match:str='', case:bool=False, sort:bool=True):
+def default(ctx:typer.Context, path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True):
     ctx.ensure_object(dict)
     
     logger.debug(f'files callback STARTED {ctx.invoked_subcommand = }')
@@ -20,7 +22,7 @@ def default(ctx:typer.Context, path:str='data', match:str='', case:bool=False, s
 
 
 @app.command('list')
-def list_files(path:str='data', match:str='', case:bool=False, sort:bool=True):
+def list_files(path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True):
     # print(locals())
     # exit()
     files_paths = list(Path(path).glob('*.xls*'))
@@ -34,7 +36,7 @@ def list_files(path:str='data', match:str='', case:bool=False, sort:bool=True):
 
 
 @app.command('open')
-def open_file(filename:str = typer.Argument(default=None), path:str='data', match:str='', case:bool=False, sort:bool=True):
+def open_file(filename:str = typer.Argument(default=None), path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True):
     # print(locals())
     # exit()
     if filename is None:
