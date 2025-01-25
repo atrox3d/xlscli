@@ -3,7 +3,7 @@ import typer
 from pathlib import Path
 
 from helpers.files import choose_file
-import xls
+import helpers.xls as xls
 
 logger = logging.getLogger(__name__)
 
