@@ -8,7 +8,12 @@ from helpers import config
 logger = logging.getLogger(__name__)
 
 
-def choose_file(path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True) -> str:
+def choose_file(
+        path:str=config.input_dir(),
+        match:str='',
+        case:bool=False,
+        sort:bool=True
+) -> str:
     files_paths = list(Path(path).glob('*.xls*'))
     file_list = [
         file.name

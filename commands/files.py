@@ -13,7 +13,13 @@ app = typer.Typer()
 
 
 @app.callback(invoke_without_command=True)
-def default(ctx:typer.Context, path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True):
+def default(
+        ctx:typer.Context,
+        path:str=config.input_dir(),
+        match:str='',
+        case:bool=False,
+        sort:bool=True
+):
     ctx.ensure_object(dict)
     
     logger.debug(f'files callback STARTED {ctx.invoked_subcommand = }')
@@ -22,7 +28,12 @@ def default(ctx:typer.Context, path:str=config.data_dir(), match:str='', case:bo
 
 
 @app.command('list')
-def list_files(path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True):
+def list_files(
+        path:str=config.input_dir(),
+        match:str='',
+        case:bool=False,
+        sort:bool=True
+):
     '''***THIS IS THE DEFAULT ACTION OF main.py***'''
     files_paths = list(Path(path).glob('*.xls*'))
     file_list = [
@@ -35,16 +46,19 @@ def list_files(path:str=config.data_dir(), match:str='', case:bool=False, sort:b
 
 
 @app.command('open')
-def open_file(filename:str = typer.Argument(default=None), path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True):
-    # print(locals())
-    # exit()
+def open_file(
+        filename:str = typer.Argument(default=None),
+        path:str=config.input_dir(),
+        match:str='', 
+        case:bool=False,
+        sort:bool=True
+):
     if filename is None:
         filename = files.choose_file(path, match, case, sort)
     filepath = Path(path, filename)
     try:
         xls.open_xls(filepath)
     except FileNotFoundError as e:
-        # logger.fatal(e)
         logger.fatal(f'{filepath} does not exist')
         raise typer.Abort()
 
