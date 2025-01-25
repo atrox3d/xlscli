@@ -3,7 +3,6 @@ import typer
 from pathlib import Path
 
 from helpers import xls
-# from helpers import config
 
 
 logger = logging.getLogger(__name__)
@@ -26,6 +25,22 @@ logger = logging.getLogger(__name__)
         # list_files(path, match, case, sort)
 
 
+def get_files(
+        path:str,
+        match:str='',
+        case:bool=False,
+        sort:bool=True,
+        reverse:bool=False
+) -> list[str]:
+    files_paths = list(Path(path).glob('*.xls*'))
+    file_list = [
+        file.name
+        for file in (files_paths if not sort else sorted(files_paths, reverse=reverse))
+        if (match if case else match.lower()) in (file.name if case else file.name.lower())
+    ]
+    return file_list
+
+
 # @app.command('list')
 def list_files(
         path:str,
@@ -34,14 +49,7 @@ def list_files(
         sort:bool=True,
         reverse:bool=False
 ):
-    files_paths = list(Path(path).glob('*.xls*'))
-    file_list = [
-        file.name
-        for file in (files_paths if not sort else sorted(files_paths, reverse=reverse))
-        if (match if case else match.lower()) in (file.name if case else file.name.lower())
-    ]
-    # for n, file in enumerate(file_list, 1):
-        # print(f'({n:2}) - {file!r}')
+    file_list = get_files(path, match, case, sort, reverse)
     for file in file_list:
         print(file)
 
@@ -69,12 +77,7 @@ def browse(
         sort:bool=True,
         reverse:bool=False
 ) -> str:
-    files_paths = list(Path(path).glob('*.xls*'))
-    file_list = [
-        file.name
-        for file in (files_paths if not sort else sorted(files_paths, reverse=reverse))
-        if (match if case else match.lower()) in (file.name if case else file.name.lower())
-    ]
+    file_list = get_files(path, match, case, sort, reverse)
     for n, file in enumerate(file_list, 1):
         print(f'({n:2}) - {file!r}')
 
@@ -82,7 +85,8 @@ def browse(
         fileno = input('choose file number: ')
         fileno = int(fileno)
         print(f'you have chosen {fileno}: {file_list[fileno-1]}')
-        return file_list[fileno-1]
+        filename = file_list[fileno-1]
+        open_file(filename, path)
     except IndexError:
         print(f'wrong number: {fileno}')
         raise typer.Abort()
