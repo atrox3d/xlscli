@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 app = typer.Typer(add_completion=False, no_args_is_help=True)
 app.command('list')(files.list_files)
 app.command('open')(files.open_file)
+app.command('browse')(files.browse)
 
 # main                          -> help
 # main list <path or .>         -> list

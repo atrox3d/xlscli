@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def choose_file(
-        path:str=config.input_dir(),
+        path:str,
         match:str='',
         case:bool=False,
         sort:bool=True
