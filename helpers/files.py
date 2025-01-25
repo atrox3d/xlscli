@@ -19,9 +19,13 @@ def choose_file(path:str=config.data_dir(), match:str='', case:bool=False, sort:
         print(f'({n:2}) - {file!r}')
 
     try:
-        fileno = int(input('choose file number: '))
+        fileno = input('choose file number: ')
+        fileno = int(fileno)
         print(f'you have chosen {fileno}: {file_list[fileno-1]}')
         return file_list[fileno-1]
     except IndexError:
-        print(f'wrong number {fileno}')
+        print(f'wrong number: {fileno}')
+        raise typer.Abort()
+    except ValueError:
+        print(f'invalid number: {fileno!r}')
         raise typer.Abort()
