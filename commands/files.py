@@ -29,21 +29,21 @@ def default(
 
 @app.command('list')
 def list_files(
-        path:str=config.input_dir(),
+        path:str='.',
         match:str='',
         case:bool=False,
         sort:bool=True
 ):
-    '''***THIS IS THE DEFAULT ACTION OF main.py***'''
     files_paths = list(Path(path).glob('*.xls*'))
     file_list = [
         file.name
         for file in (files_paths if not sort else sorted(files_paths))
         if (match if case else match.lower()) in (file.name if case else file.name.lower())
     ]
-    for n, file in enumerate(file_list, 1):
-        print(f'({n:2}) - {file!r}')
-
+    # for n, file in enumerate(file_list, 1):
+        # print(f'({n:2}) - {file!r}')
+    for file in file_list:
+        print(file)
 
 @app.command('open')
 def open_file(
