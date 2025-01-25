@@ -2,7 +2,7 @@ import logging
 import typer
 from pathlib import Path
 
-from helpers.files import choose_file
+from helpers import files
 from helpers import xls
 from helpers import config
 
@@ -40,7 +40,7 @@ def open_file(filename:str = typer.Argument(default=None), path:str=config.data_
     # print(locals())
     # exit()
     if filename is None:
-        filename = choose_file(path, match, case, sort)
+        filename = files.choose_file(path, match, case, sort)
     filepath = Path(path, filename)
     try:
         xls.open_xls(filepath)

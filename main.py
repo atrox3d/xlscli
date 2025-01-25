@@ -3,8 +3,8 @@ import pandas
 import numpy
 import typer
 
-import commands.files as files
-import helpers.logconfig as logconfig
+from commands import files
+from helpers import logconfig
 from helpers import config
 
 logger = logging.getLogger(__name__)
