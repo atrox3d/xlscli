@@ -4,7 +4,7 @@ import numpy
 import typer
 
 import commands.files as files
-import logconfig
+import helpers.logconfig as logconfig
 
 logger = logging.getLogger(__name__)
 
