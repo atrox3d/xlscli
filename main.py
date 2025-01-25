@@ -7,7 +7,7 @@ from helpers import config
 
 logger = logging.getLogger(__name__)
 
-app = typer.Typer(add_completion=False)
+app = typer.Typer(add_completion=False, no_args_is_help=True)
 app.add_typer(
     files.app, 
     # name='files'
@@ -53,8 +53,8 @@ def default(
     print(f'{ctx.default_map = }')
     ctx.ensure_object(dict)
     logger.info(f'main callback STARTED {ctx.invoked_subcommand = }')
-    if ctx.invoked_subcommand is None:
-        files.list_files(path, match, case, sort)
+    # if ctx.invoked_subcommand is None:
+        # files.list_files(path, match, case, sort)
 
 
 if __name__ == "__main__":
