@@ -9,12 +9,13 @@ logger = logging.getLogger(__name__)
 
 app = typer.Typer(add_completion=False, no_args_is_help=True)
 app.command('list')(files.list_files)
+app.command('open')(files.open_file)
 
 # main                          -> help
 # main list <path or .>         -> list
 
 # main open <filepath>          -> open
-# main open --path <path>       -> choose -> open
+# main open <filepath|filename> --path <path>       -> choose -> open
 # main browse <path>            -> choose -> open
 
 

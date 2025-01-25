@@ -47,16 +47,13 @@ def list_files(
 
 @app.command('open')
 def open_file(
-        filename:str = typer.Argument(default=None),
-        path:str=config.input_dir(),
-        match:str='', 
-        case:bool=False,
-        sort:bool=True
+        filename:str,
+        path:str=None,
 ):
-    if filename is None:
-        # filename = files.choose_file(path, match, case, sort)
-        raise typer.Exit(1)
-    filepath = Path(path, filename)
+    if path is not None:
+        filepath = Path(path, filename)
+    else:
+        filepath = Path(filename)
     try:
         xls.open_xls(filepath)
     except FileNotFoundError as e:
