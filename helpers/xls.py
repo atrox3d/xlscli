@@ -4,6 +4,9 @@ from pathlib import Path
 import typer
 
 
+logger = logging.getLogger(__name__)
+
+
 def open_xls(path:Path) -> pandas.DataFrame:
     df = pandas.read_excel(path, sheet_name=None)
     print(df)

@@ -1,7 +1,12 @@
 import typer
 from pathlib import Path
+import logging
 
 from helpers import config
+
+
+logger = logging.getLogger(__name__)
+
 
 def choose_file(path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True) -> str:
     files_paths = list(Path(path).glob('*.xls*'))
