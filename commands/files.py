@@ -70,7 +70,7 @@ def open_file(
         raise typer.Abort()
 
 
-def browse(
+def browse_file(
         path:str,
         match:str='',
         case:bool=False,
@@ -80,7 +80,6 @@ def browse(
     file_list = get_files(path, match, case, sort, reverse)
     for n, file in enumerate(file_list, 1):
         print(f'({n:2}) - {file!r}')
-
     try:
         fileno = input('choose file number: ')
         fileno = int(fileno)
