@@ -54,7 +54,8 @@ def open_file(
         sort:bool=True
 ):
     if filename is None:
-        filename = files.choose_file(path, match, case, sort)
+        # filename = files.choose_file(path, match, case, sort)
+        raise typer.Exit(1)
     filepath = Path(path, filename)
     try:
         xls.open_xls(filepath)

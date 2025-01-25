@@ -29,8 +29,11 @@ app.add_typer(
 # main open                     -> choose -> open
 
 
+
+
 # main                          -> help
 # main list --path <path or .>  -> list
+
 # main open <filepath>          -> open
 # main open --path <path>       -> choose -> open
 # main browse <path>            -> choose -> open
