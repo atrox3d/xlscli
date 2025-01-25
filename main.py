@@ -8,7 +8,10 @@ from helpers import config
 logger = logging.getLogger(__name__)
 
 app = typer.Typer(add_completion=False)
-app.add_typer(files.app, name='files')
+app.add_typer(
+    files.app, 
+    # name='files'
+)
 
 # main (list)
 # main files list
