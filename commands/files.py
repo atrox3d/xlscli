@@ -23,8 +23,7 @@ def default(ctx:typer.Context, path:str=config.data_dir(), match:str='', case:bo
 
 @app.command('list')
 def list_files(path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True):
-    # print(locals())
-    # exit()
+    '''***THIS IS THE DEFAULT ACTION OF main.py***'''
     files_paths = list(Path(path).glob('*.xls*'))
     file_list = [
         file.name

@@ -19,6 +19,8 @@ def default(
     path:str=config.data_dir(), match:str='', case:bool=False, sort:bool=True,
     log_level:logconfig.LogLevels = 'INFO'
 ):
+    '''***DEFAULT ACTION WITH NO ARGUMENTS IS THE LIST COMMAND***'''
+    
     logging.basicConfig(
         level=log_level.value
     )
