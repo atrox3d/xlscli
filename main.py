@@ -3,7 +3,7 @@ import pandas
 import numpy
 import typer
 
-import files
+import commands.files as files
 import logconfig
 
 logger = logging.getLogger(__name__)
