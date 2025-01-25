@@ -29,7 +29,7 @@ def default(
 
 @app.command('list')
 def list_files(
-        path:str='.',
+        path:str,
         match:str='',
         case:bool=False,
         sort:bool=True
