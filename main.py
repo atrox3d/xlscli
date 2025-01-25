@@ -8,31 +8,10 @@ from helpers import config
 logger = logging.getLogger(__name__)
 
 app = typer.Typer(add_completion=False, no_args_is_help=True)
-app.add_typer(
-    files.app, 
-    # name='files'
-)
-
-# main (list)
-# main files list
-# main files open [filepath or chooser]
+app.command('list')(files.list_files)
 
 # main                          -> help
-# main files list               -> list
-# main files open <filepath>    -> open
-# main files open               -> choose -> open
-
-
-# main                          -> help
-# main list                     -> list
-# main open <filepath>          -> open
-# main open                     -> choose -> open
-
-
-
-
-# main                          -> help
-# main list --path <path or .>  -> list
+# main list <path or .>         -> list
 
 # main open <filepath>          -> open
 # main open --path <path>       -> choose -> open
