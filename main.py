@@ -7,7 +7,7 @@ from helpers import config
 
 logger = logging.getLogger(__name__)
 
-app = typer.Typer(add_completion=False, no_args_is_help=True)
+app = typer.Typer(add_completion=False, no_args_is_help=False)
 app.command('list')(files.list_files)
 app.command('open')(files.open_file)
 app.command('browse')(files.browse_file)
@@ -31,15 +31,18 @@ def default(
     sort:bool=True,  # list params
     log_level:logconfig.LogLevels = 'INFO'
 ):
-    '''***DEFAULT ACTION WITH NO ARGUMENTS IS THE LIST COMMAND***'''
+    '''***DEFAULT ACTION WITH NO ARGUMENTS IS THE LIST COMMAND AND no_args_is_help==False***'''
     
     logging.basicConfig(level=log_level.value)
     print(f'{ctx.default_map = }')
+    logger.info('ensuring ctx.obj dict')
     ctx.ensure_object(dict)
     logger.info(f'main callback STARTED {ctx.invoked_subcommand = }')
     # if ctx.invoked_subcommand is None:
         # files.list_files(path, match, case, sort)
-
+    logger.info(f'{ctx.args = }')
+    if not ctx.args:
+        ctx.get_help()
 
 if __name__ == "__main__":
     app()
