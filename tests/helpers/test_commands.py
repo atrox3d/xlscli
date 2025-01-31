@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import subprocess
 from typing import Generator
 import pytest
 
@@ -91,3 +92,25 @@ def test_dry_run(temp_dir, fake_files, fake_xls_files_ls_output):
     assert result.returncode == 0
     assert result.stdout == fake_xls_files_ls_output
     assert result.stderr == ''
+
+
+def test_run_without_raise(temp_dir):
+    result = commands.run(
+                'ls dontexist', 
+                path=temp_dir,
+                pushd=True,
+    )
+    assert result.args == ['ls', 'dontexist']
+    assert result.returncode == 1
+    assert result.stdout == ''
+    assert result.stderr == 'ls: dontexist: No such file or directory\n'
+
+
+def test_run_with_raise(temp_dir):
+    with pytest.raises(subprocess.CalledProcessError):
+        result = commands.run(
+                    'ls dontexist', 
+                    path=temp_dir,
+                    pushd=True,
+                    raise_for_errors=True
+        )
