@@ -1,24 +1,4 @@
-from tempfile import TemporaryDirectory
-from pathlib import Path
-from typing import Generator
-import pytest
-
-
 from helpers import files
-
-
-@pytest.fixture
-def temp_dir() -> Generator[str, None, None]:
-    with TemporaryDirectory() as temp_dir:
-        yield temp_dir
-
-
-@pytest.fixture
-def fake_files(temp_dir) -> Generator[list, None, None]:
-    fake_xls_files = ['1.xls', '2.xlsx', 'a.xls']
-    for file in fake_xls_files:
-        Path(temp_dir, file).touch()
-    yield fake_xls_files
 
 
 def test_get_files(temp_dir, fake_files):
