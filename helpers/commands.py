@@ -73,7 +73,7 @@ def _run(
     ''' runs the command if dry_run is False, raises exception if check is True '''
     
     options = locals()
-    print(options)
+    logger.debug(f'{options = }')
     logger.debug(f'{command = }')
 
     # shlex.split breaks on windows paths
@@ -83,7 +83,15 @@ def _run(
     logger.debug(f'{args = }')
 
     logger.info(f'RUN     | {args = }')
-    completed = subprocess.run(args, check=check, shell=shell, capture_output=True, text=True)
+    completed = subprocess.run(
+                        args, 
+                        check=check, 
+                        shell=shell, 
+                        capture_output=True, 
+                        text=True, 
+                        encoding='utf-8', 
+                        # universal_newlines=True,
+                )
     logger.debug(f'{completed = }')
         
     return completed
