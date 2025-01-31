@@ -6,6 +6,8 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
+# workaround for testing
+# delete after implementation
 try:
     from helpers import commands
 except ModuleNotFoundError:
