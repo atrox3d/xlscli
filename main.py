@@ -14,7 +14,7 @@ app = typer.Typer(
 
 # link commands directly to functions, not to sub app
 app.command('list'  )(files.list_files)
-app.command('browse')(files.browse_file)
+app.command('browse')(files.browse_for_file)
 app.command('open'  )(files.open_file)
 
 '''

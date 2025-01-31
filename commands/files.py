@@ -24,7 +24,7 @@ def list_files(
         print(file)
 
 
-def browse_file(
+def browse_for_file(
         path   :str  = typer.Argument(default='.'),
         match  :str  = '',
         case   :bool = False,
