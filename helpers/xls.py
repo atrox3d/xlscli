@@ -8,8 +8,13 @@ logger = logging.getLogger(__name__)
 
 
 def open_xls(path:Path) -> pandas.DataFrame:
-    df = pandas.read_excel(path, sheet_name=None)
-    print(df)
-    print(f'total sheets: {len(df)}')
-    print(f'sheets: {list(df.keys())}')
+    workbook = pandas.read_excel(path, sheet_name=None)
+    for sheet, df in workbook.items():
+        print()
+        print(sheet)
+        print()
+        print(df.to_string(index=False))
+        print()
+    print(f'total sheets: {len(workbook)}')
+    print(f'sheets: {list(workbook.keys())}')
 
