@@ -23,3 +23,10 @@ def test_fake_config():
         assert data == fakedata
 
 
+def test_check_after():
+    assert config._defaults != config._config
+
+
+def test_reset_to_defaults():
+    config.reset_to_defaults()
+    assert config._defaults == config._config

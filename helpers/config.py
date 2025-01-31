@@ -11,6 +11,11 @@ _defaults = {
 _config = _defaults.copy()
 
 
+def reset_to_defaults():
+    global _config
+    _config = _defaults.copy()
+
+
 def load(
     jsonpath  :str, 
     _config   :dict = _config, 
