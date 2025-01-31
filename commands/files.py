@@ -16,6 +16,8 @@ def list_files(
         sort   :bool = True,
         reverse:bool = False
 ):
+    '''lists files in <PATH> or in current dir'''
+    
     logger.info(f'listing xls* files in {Path(path).resolve()}')
     file_list = get_files(path, match, case, sort, reverse)
     for file in file_list:
@@ -29,6 +31,8 @@ def browse_file(
         sort   :bool = True,
         reverse:bool = False
 ) -> str:
+    '''browse files in <PATH> or current dir'''
+    
     file_list = get_files(path, match, case, sort, reverse)
     logger.info(f'listing xls* files in {Path(path).resolve()}')
     if file_list:
@@ -41,10 +45,10 @@ def browse_file(
             filename = file_list[fileno-1]
             open_file(filename, path)
         except IndexError:
-            print(f'wrong number: {fileno}')
+            logger.critical(f'wrong number: {fileno}')
             raise typer.Abort()
         except ValueError:
-            print(f'invalid number: {fileno!r}')
+            logger.critical(f'invalid number: {fileno!r}')
             raise typer.Abort()
     else:
         logger.warning(f'no xls* files found in {Path(path).resolve()}')
@@ -53,8 +57,10 @@ def browse_file(
 # @app.command('open')
 def open_file(
         filename :str,
-        path     :str=None,
+        path     :str = None,
 ):
+    '''opens file in <PATH> or current dir'''
+    
     if path is not None:
         filepath = Path(path, filename)
     else:
@@ -62,5 +68,5 @@ def open_file(
     try:
         xls.open_xls(filepath)
     except FileNotFoundError as e:
-        logger.fatal(f'{filepath} does not exist')
+        logger.critical(f'{filepath} does not exist')
         raise typer.Abort()

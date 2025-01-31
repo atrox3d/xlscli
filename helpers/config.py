@@ -13,8 +13,8 @@ _config = _defaults.copy()
 
 def load(
     jsonpath  :str, 
-    _config   :dict=_config, 
-    _defaults :dict=_defaults
+    _config   :dict = _config, 
+    _defaults :dict = _defaults
 ) -> dict:
     _config.update(_defaults)
     try:
