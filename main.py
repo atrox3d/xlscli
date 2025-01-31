@@ -2,7 +2,7 @@ import logging
 import typer
 
 from commands import files
-from helpers import logconfig
+from helpers import logging_enum
 from helpers import config
 
 logger = logging.getLogger(__name__)
@@ -14,8 +14,8 @@ app = typer.Typer(
 
 # link commands directly to functions, not to sub app
 app.command('list'  )(files.list_files)
-app.command('open'  )(files.open_file)
 app.command('browse')(files.browse_file)
+app.command('open'  )(files.open_file)
 
 '''
 schema of commands:
@@ -29,10 +29,13 @@ main browse <path>            -> choose -> open
 '''
 
 @app.callback(invoke_without_command=True)
-def default(
+def default_callback(
     ctx:typer.Context, 
-    log_level:logconfig.LogLevels='DEBUG'
+    log_level:logging_enum.LogLevelsEnum='DEBUG'
 ):
+    '''default_callback: configure logging, ctx and calls this help'''
+    
+    logging_enum.print_info()
     # configure logging
     logging.basicConfig(level=log_level.value)
     
