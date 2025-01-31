@@ -83,7 +83,9 @@ def _run(
     logger.debug(f'{args = }')
 
     logger.debug(f'RUN     | {args = }')
-    completed = subprocess.run(args, check=check, shell=shell, capture_output=True, text=True)
+    completed = subprocess.run(
+                    command if shell else args, 
+                    check=check, shell=shell, capture_output=True, text=True)
     logger.debug(f'{completed = }')
         
     return completed
