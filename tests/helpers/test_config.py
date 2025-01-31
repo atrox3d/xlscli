@@ -30,3 +30,7 @@ def test_check_after():
 def test_reset_to_defaults():
     config.reset_to_defaults()
     assert config._defaults == config._config
+
+
+def test_input_dir():
+    assert config.input_dir() == '.data_in'
