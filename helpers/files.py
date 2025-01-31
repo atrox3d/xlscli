@@ -1,21 +1,3 @@
-# app = typer.Typer()
-
-
-# @app.callback(invoke_without_command=True)
-# def default(
-        # ctx:typer.Context,
-        # path:str=config.input_dir(),
-        # match:str='',
-        # case:bool=False,
-        # sort:bool=True
-# ):
-    # ctx.ensure_object(dict)
-    # 
-    # logger.debug(f'files callback STARTED {ctx.invoked_subcommand = }')
-    # if ctx.invoked_subcommand is None:
-        # list_files(path, match, case, sort)
-
-
 from pathlib import Path
 
 
