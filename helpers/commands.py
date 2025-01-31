@@ -82,7 +82,7 @@ def _run(
     args = shlex.split(command)
     logger.debug(f'{args = }')
 
-    logger.info(f'RUN     | {args = }')
+    logger.debug(f'RUN     | {args = }')
     completed = subprocess.run(args, check=check, shell=shell, capture_output=True, text=True)
     logger.debug(f'{completed = }')
         

@@ -14,15 +14,24 @@ except ModuleNotFoundError:
     from helpers import commands
 
 
-def db_up():
-    completed = commands.run(
+def check_yml(path:str=None, filename:str='docker-compose.yml') -> None:
+    if path:
+        yml = Path(path, 'docker-compose.yml')
+    else:
+        yml = Path('docker-compose.yml')
+    if not yml.exists():
+        raise FileNotFoundError(yml)
+
+
+def db_up(path:str=None) -> subprocess.CompletedProcess:
+    check_yml(path)
+    return commands.run(
         'docker compose up -d',
         raise_for_errors=True
     )
-    return True
 
 
-def docker_ps():
+def docker_ps() -> list[str]|None:
     completed = commands.run(
         'docker ps -q',
         raise_for_errors=True
@@ -33,12 +42,12 @@ def docker_ps():
     return None
 
 
-def db_down():
-    completed = commands.run(
+def db_down(path:str=None) -> subprocess.CompletedProcess:
+    check_yml(path)
+    return commands.run(
         'docker compose down',
         raise_for_errors=True
     )
-    return True
 
 
 if __name__ == "__main__":
