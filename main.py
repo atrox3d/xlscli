@@ -30,8 +30,8 @@ main browse <path>            -> choose -> open
 
 @app.callback(invoke_without_command=True)
 def default_callback(
-    ctx:typer.Context, 
-    log_level:logging_enum.LogLevelsEnum='DEBUG'
+    ctx       :typer.Context, 
+    log_level :logging_enum.LogLevelsEnum='DEBUG'
 ):
     '''default_callback: configure logging, ctx and calls this help'''
     

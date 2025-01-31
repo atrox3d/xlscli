@@ -11,7 +11,11 @@ _defaults = {
 _config = _defaults.copy()
 
 
-def load(jsonpath:str, _config:dict=_config, _defaults:dict=_defaults) -> dict:
+def load(
+    jsonpath  :str, 
+    _config   :dict=_config, 
+    _defaults :dict=_defaults
+) -> dict:
     _config.update(_defaults)
     try:
         with open(jsonpath, 'r') as fp:
