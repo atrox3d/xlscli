@@ -7,3 +7,4 @@ build/
 *.json
 .*/
 !/.data_in/
+!/.vscode/settings.json
