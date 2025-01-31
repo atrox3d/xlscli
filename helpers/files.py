@@ -20,11 +20,11 @@ from pathlib import Path
 
 
 def get_files(
-        path:str,
-        match:str='',
-        case:bool=False,
-        sort:bool=True,
-        reverse:bool=False
+        path   :str,
+        match  :str  = '',
+        case   :bool = False,
+        sort   :bool = True,
+        reverse:bool = False
 ) -> list[str]:
     files_paths = list(Path(path).glob('*.xls*'))
     file_list = [

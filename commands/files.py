@@ -10,12 +10,11 @@ logger = logging.getLogger(__name__)
 
 # @app.command('list')
 def list_files(
-        ctx:typer.Context, 
-        path:str=typer.Argument(default='.'),
-        match:str='',
-        case:bool=False,
-        sort:bool=True,
-        reverse:bool=False
+        path   :str  = typer.Argument(default='.'),
+        match  :str  = '',
+        case   :bool = False,
+        sort   :bool = True,
+        reverse:bool = False
 ):
     logger.info(f'listing xls* files in {Path(path).resolve()}')
     file_list = get_files(path, match, case, sort, reverse)
@@ -24,11 +23,11 @@ def list_files(
 
 
 def browse_file(
-        path:str=typer.Argument(default='.'),
-        match:str='',
-        case:bool=False,
-        sort:bool=True,
-        reverse:bool=False
+        path   :str  = typer.Argument(default='.'),
+        match  :str  = '',
+        case   :bool = False,
+        sort   :bool = True,
+        reverse:bool = False
 ) -> str:
     file_list = get_files(path, match, case, sort, reverse)
     logger.info(f'listing xls* files in {Path(path).resolve()}')
@@ -50,10 +49,11 @@ def browse_file(
     else:
         logger.warning(f'no xls* files found in {Path(path).resolve()}')
 
+
 # @app.command('open')
 def open_file(
-        filename:str,
-        path:str=None,
+        filename :str,
+        path     :str=None,
 ):
     if path is not None:
         filepath = Path(path, filename)
