@@ -11,8 +11,17 @@ def temp_dir() -> Generator[str, None, None]:
 
 
 @pytest.fixture
-def fake_files(temp_dir) -> Generator[list[str], None, None]:
-    fake_xls_files = ['1.xls', '2.xlsx', 'a.xls']
-    for file in fake_xls_files:
+def fake_xls_filenames() -> list[str]:
+    return ['1.xls', '2.xlsx', 'a.xls']
+
+
+@pytest.fixture
+def fake_xls_files_ls_output(fake_xls_filenames) -> list[str]:
+    return '\n'.join(fake_xls_filenames) + '\n'
+
+
+@pytest.fixture
+def fake_files(temp_dir, fake_xls_filenames) -> Generator[list[str], None, None]:
+    for file in fake_xls_filenames:
         Path(temp_dir, file).touch()
-    yield fake_xls_files
+    yield fake_xls_filenames
