@@ -5,3 +5,5 @@ build/
 *.log
 .venv/
 *.json
+.*/
+!/.data_in/
