@@ -3,6 +3,7 @@ import os
 import subprocess
 from typing import Generator
 import pytest
+from unittest.mock import patch
 
 from helpers import commands
 
@@ -114,3 +115,23 @@ def test_run_with_raise(temp_dir):
                     pushd=True,
                     raise_for_errors=True
         )
+
+
+def test_confirmy():
+    with patch( 'helpers.commands.input', side_effect=['y']):
+        assert commands.confirm(make_sure=False) == True
+
+
+def test_confirmn():
+    with patch( 'helpers.commands.input', side_effect=['n']):
+        assert commands.confirm(make_sure=False) == False
+
+
+def test_confirmy_makesurey():
+    with patch( 'helpers.commands.input', side_effect=['y', 'y']):
+        assert commands.confirm(make_sure=True) == True
+
+
+def test_confirmy_makesuren():
+    with patch( 'helpers.commands.input', side_effect=['y', 'n']):
+        assert commands.confirm(make_sure=True) == False
