@@ -135,3 +135,84 @@ def test_confirmy_makesurey():
 def test_confirmy_makesuren():
     with patch( 'helpers.commands.input', side_effect=['y', 'n']):
         assert commands.confirm(make_sure=True) == False
+
+
+def test_run_confirmy(temp_dir, fake_files):
+    with patch( 'helpers.commands.input', side_effect=['y']):
+        # assert commands.confirm(make_sure=False) == True
+        result = commands.run(
+                    'rm *', 
+                    path=temp_dir,
+                    pushd=True,
+                    shell=True,  # needed for wildcard
+                    ask_confirmation=True,
+                )
+        assert result.args == 'rm *'
+        assert result.returncode == 0
+        assert result.stdout == ''
+        assert result.stderr == ''
+        
+        result = commands.run(
+                    'ls', 
+                    path=temp_dir,
+                    pushd=True,
+                )
+        assert result.args == ['ls']
+        assert result.returncode == 0
+        assert result.stdout == ''
+        assert result.stderr == ''
+
+
+def test_run_confirmy_makesurey(temp_dir, fake_files):
+    with patch( 'helpers.commands.input', side_effect=['y', 'y']):
+        # assert commands.confirm(make_sure=False) == True
+        result = commands.run(
+                    'rm *', 
+                    path=temp_dir,
+                    pushd=True,
+                    shell=True,  # needed for wildcard
+                    ask_confirmation=True,
+                    make_sure=True
+                )
+        assert result.args == 'rm *'
+        assert result.returncode == 0
+        assert result.stdout == ''
+        assert result.stderr == ''
+        
+        result = commands.run(
+                    'ls', 
+                    path=temp_dir,
+                    pushd=True,
+                )
+        assert result.args == ['ls']
+        assert result.returncode == 0
+        assert result.stdout == ''
+        assert result.stderr == ''
+
+
+def test_run_confirmn(temp_dir, fake_files):
+    with patch( 'helpers.commands.input', side_effect=['n']):
+        # assert commands.confirm(make_sure=False) == True
+        result = commands.run(
+                    'rm *', 
+                    path=temp_dir,
+                    pushd=True,
+                    shell=True,  # needed for wildcard
+                    ask_confirmation=True,
+                )
+        assert result == None
+
+
+def test_run_confirmy_makesuren(temp_dir, fake_files):
+    with patch( 'helpers.commands.input', side_effect=['y', 'n']):
+        # assert commands.confirm(make_sure=False) == True
+        result = commands.run(
+                    'rm *', 
+                    path=temp_dir,
+                    pushd=True,
+                    shell=True,  # needed for wildcard
+                    ask_confirmation=True,
+                    make_sure=True
+                )
+        assert result == None
+
