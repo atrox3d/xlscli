@@ -33,9 +33,9 @@ def db_up(path:str=None) -> subprocess.CompletedProcess:
     )
 
 
-def docker_ps() -> list[str]|None:
+def docker_compose_ps() -> list[str]|None:
     completed = commands.run(
-        'docker ps -q',
+        'docker compose ps -q',
         raise_for_errors=True
     )
     # print(f'{completed.stdout!r}')
@@ -61,7 +61,7 @@ if __name__ == "__main__":
         print('spinning up db...')
         db_up()
         
-        containers = docker_ps()
+        containers = docker_compose_ps()
         if not containers:
             logging.error('no containers')
         else:
