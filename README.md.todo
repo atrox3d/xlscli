@@ -1,0 +1,86 @@
+# xlscli
+
+CLI per manipolare file Excel da linea di comando.
+
+```bash
+pip install xlscli
+```
+
+## Utilizzo
+
+```bash
+xlscli --help
+```
+
+## Caratteristiche
+
+- Leggi file Excel
+- Modifica file Excel
+- Esporta in diversi formati
+- Supporto per formule e formattazione
+
+---
+
+# xlscli
+
+CLI tool to manipulate Excel files from command line.
+
+## Installation
+
+```bash
+pip install xlscli
+```
+
+## Usage
+
+```bash
+xlscli --help
+```
+
+## Features
+
+- Read Excel files
+- Edit Excel files
+- Export to different formats
+- Support for formulas and formatting
+```bash
+# TODO: aggiungere istruzioni di installazione
+```
+
+## Utilizzo
+
+```bash
+# TODO: aggiungere esempi di utilizzo
+```
+
+## Caratteristiche
+
+- Leggi file Excel
+- Modifica file Excel
+- Esporta in diversi formati
+- Supporto per formule e formattazione
+
+---
+
+# xlscli
+
+CLI tool to manipulate Excel files from command line.
+
+## Installation 
+
+```bash
+# TODO: add installation instructions
+```
+
+## Usage
+
+```bash
+# TODO: add usage examples
+```
+
+## Features
+
+- Read Excel files
+- Edit Excel files 
+- Export to different formats
+- Support for formulas and formatting
